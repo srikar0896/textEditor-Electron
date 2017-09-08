@@ -1,0 +1,14 @@
+{
+  "name": "text-Editor",
+  "version": "1.0.0",
+  "description": "simple text Editor",
+  "repository": "simple text Editor",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron app.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.7.5"
+  }
+}
