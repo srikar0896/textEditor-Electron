@@ -17,7 +17,7 @@ $ npm start
 
 ### Contibutors
 
-| Name | Github |
-| ------ | ------ |
-| Chaitanya | [https://github.com/chaitanyachavali] [PlDb] |
-| Srikar | [https://github.com/srikar0896] [PlGh] |
+| Name |
+| ------ |
+| [Chaitanya](https://github.com/Chaitanyachavali/) |
+| [Srikar](https://github.com/srikar0896/) |
