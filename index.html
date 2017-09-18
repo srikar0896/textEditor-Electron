@@ -1,97 +1,84 @@
+<!-- author: chaitanyachavali
+web: http://chaitanyachavali.com -->
+
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="author" content="chaitanyachavali">
+        <title>Text Editor</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+    <body>
 
-<head>
-  <meta charset="utf-8">
+        <div class="wrapper">
+            <nav id="sidebar" class="active">
+                <div class="sidebar-header">
+                    <h3>Text Editor</h3>
+                </div>
 
-  <title>Text Editor</title>
+                <ul class="list-unstyled components">
+                    <p>Select Option</p>
+                    <li>
+                        <a class="navLink">New</a>
+                    </li>
+                    <li>
+                        <a class="navLink">Open</a>
+                    </li>
+                    <li>
+                        <a class="navLink">Save</a>
+                    </li>
+                    <li>
+                        <a class="navLink">Save as</a>
+                    </li>
+                </ul>
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="./assets/styles/bootstrap-3.3.7.css">
-  <link rel="stylesheet" href="./assets/styles/styles.css">
+                <ul class="list-unstyled CTAs">
+                    <li><a href="https://github.com/srikar0896/textEditor-Electron" class="sideNavBtn">Source</a></li>
+                </ul>
+            </nav>
 
-  <!-- Scripts -->
-  <script>
-    window.$ = window.jQuery = require('./assets/scripts/jquery-3.1.1.js');
-  </script>
-</head>
+            <i class="fa fa-caret-right carat fa-5x" id="right"></i>
+            <i class="fa fa-caret-left carat fa-5x" id="left"></i>
 
-<body>
-  <div id="container" class="container-fluid">
-    <div id="wrapper">
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        			<span class="sr-only">Toggle navigation</span>
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-    			</button>
-            <div class="navbar-brand">
-              <a id="menu-toggle" class="glyphicon glyphicon-align-justify btn-menu toggle">
-                        <i class="fa fa-bars"></i>
-                    </a>
-              <a href="#">Text Editor</a>
+            <div id="content">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="navbar-btn active">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Folder Name</a></li>
+                                <li><a href="#">File Name</a></li>
+                                <li><a href="#">File Size</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <textarea placeholder="Text Here" id="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 400px; "></textarea>
+                <div class="line"></div>
+                <strong>OS - </strong><span>Windows</span> | <strong>Free Memory - </strong><span>1 GB</span>
+                <strong style="float:right;">Word Count - <i>20</i></strong>
             </div>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#" id="dirName"></a></li>
-              <li><a href="#about" id="fileName"></a></li>
-              <li><a href="#about" id="fileSize"></a></li>
-            </ul>
-          </div>
         </div>
-      </nav>
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <nav id="spy">
-          <ul class="sidebar-nav nav sideMenuList">
-            <li class="sidebar-brand">
-              <a href="#home"><span class="fa fa-home solo">Home</span></a>
-            </li>
-            <li>
-              <a href="#anch1">
-                        <span class="fa fa-anchor solo">New</span>
-                    </a>
-            </li>
-            <li>
-              <a href="#anch2">
-                        <span class="fa fa-anchor solo">Open</span>
-                    </a>
-            </li>
-            <li>
-              <a href="#anch3">
-                        <span class="fa fa-anchor solo">Save</span>
-                    </a>
-            </li>
-            <li>
-              <a href="#anch4">
-                        <span class="fa fa-anchor solo">Save As</span>
-                    </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <!-- Page content -->
-      <div id="page-content-wrapper">
-        <div class="page-content">
-          <div style="overflow-y:scroll" class="container-fluid">
-            <div class="row">
-              <textarea rows="20" style="height:75%;width:100%" id="textData"></textarea>
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <footer style="position:absolute;background:#212121;bottom:0px;height:50px;width:100%" class="footer" role="footer">
-    <p class="font-white boldCase float-left">OS platform - <span id="osPlat"></span>/Available RAM -<span id="freeMem"></></p>
-	<p class="font-white boldCase float-right">Charecter Count- <span id="charCount"></span></p>
-  </footer>
-</body>
-
+         <script>
+             window.$ = window.jQuery = require('./assets/js/jquery.min.js');
+         </script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <script>
+             require('./assets/js/app.js');
+         </script>
+    </body>
 </html>
