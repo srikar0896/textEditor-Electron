@@ -1,14 +1,26 @@
 {
-  "name": "text-Editor",
+  "name": "text-editor",
   "version": "1.0.0",
-  "description": "simple text Editor",
-  "repository": "simple text Editor",
-  "main": "app.js",
+  "description": "Basic text editor. Developed for NEXT EDUCATION as an assignement",
+  "main": "index.js",
   "scripts": {
-    "start": "electron app.js"
+    "start": "electron ."
   },
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srikar0896/textEditor-Electron.git"
+  },
+  "keywords": [
+    "electron",
+    "text-electron"
+  ],
+  "author": "chaitanyachavali <http://chaitanyachavali.com>, Srikar.Ch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chaitanyachavali/electron-text-editor/issues"
+  },
+  "homepage": "https://github.com/chaitanyachavali/electron-text-editor#readme",
   "dependencies": {
-    "electron": "^1.7.5"
+    "electron": "^1.7.6"
   }
 }
