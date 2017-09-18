@@ -11,7 +11,18 @@ web: http://chaitanyachavali.com -->
         <title>Text Editor</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Styles -->
         <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- Scripts -->
+        <script>
+            window.$ = window.jQuery = require('./assets/js/jquery.min.js');
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="assets/js/toggleMenu.js" charset="utf-8"></script>
+        <script src="assets/js/app.js" charset="utf-8"></script>
+
     </head>
     <body>
 
@@ -27,7 +38,7 @@ web: http://chaitanyachavali.com -->
                         <a class="navLink">New</a>
                     </li>
                     <li>
-                        <a class="navLink">Open</a>
+                        <a onClick="openFile()" class="navLink">Open</a>
                     </li>
                     <li>
                         <a class="navLink">Save</a>
@@ -66,19 +77,12 @@ web: http://chaitanyachavali.com -->
                     </div>
                 </nav>
 
-                <textarea placeholder="Text Here" id="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 400px; "></textarea>
+                <textarea placeholder="Text Here" id="text" class="textInput" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 400px; "></textarea>
                 <div class="line"></div>
                 <strong>OS - </strong><span>Windows</span> | <strong>Free Memory - </strong><span>1 GB</span>
                 <strong style="float:right;">Word Count - <i>20</i></strong>
             </div>
         </div>
 
-         <script>
-             window.$ = window.jQuery = require('./assets/js/jquery.min.js');
-         </script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-         <script>
-             require('./assets/js/app.js');
-         </script>
     </body>
 </html>

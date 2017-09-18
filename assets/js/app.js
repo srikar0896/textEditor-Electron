@@ -1,16 +1,27 @@
-// author: chaitanyachavali
-// web: http://chaitanyachavali.com
+$(function () {
 
-$(document).ready(function() {
-    $('#sidebarCollapse').on('click', function() {
-        $('#sidebar').toggleClass('active');
-        $(this).toggleClass('active');
-        $("#left").toggle();
-        $("#right").toggle();
-    });
-    $("#left").toggle();
-    $("#right, #left").on('click', function() {
-        $("#sidebarCollapse").trigger('click');
-    });
+	var os = require('os');
+	var fs = require('fs');
+	var app = require('electron').remote;
+	var dialog = app.dialog;
+
+  // DOM elements initialization
+  var textInput = $(".textInput");
+
+  openFile = function(){
+    dialog.showOpenDialog(function (fileNames) {
+
+    if (fileNames === undefined) return;
+
+      var fileName = fileNames[0];
+
+        fs.readFile(fileName, 'utf-8', function (err, data) {
+			       currentFilePath = fileName;
+			       textInput.val(data);
+
+             //TODO:implement the top nav foldername,filename and filesize.
+  	  });
+  	 });
+    };
+
 });
-
