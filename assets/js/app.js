@@ -24,4 +24,25 @@ $(function () {
   	 });
     };
 
+    saveFile = function(){
+      var content = $("#text").val();
+      var check = content.replace(/ /g, '');
+      if (check === '') {
+          dialog.showErrorBox('Cannot Continue!', 'Please write something in the textarea to save');
+      } else {
+          dialog.showSaveDialog((savePath) => {
+              if (savePath === undefined) {
+                  console.log("Error in detecting the path to save the file");
+                  return;
+              }
+              file.writeFile(savePath, content, (error) => {
+                  if (error) console.log('File not saved; ' + error);
+                  console.log('File saved at ' + savePath);
+                  
+                  //TODO:implement the top nav foldername,filename and filesize.
+              });
+          });
+      }
+    };
+
 });
