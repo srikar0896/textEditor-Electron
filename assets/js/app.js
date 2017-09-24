@@ -6,42 +6,39 @@ $(function () {
 	var dialog = app.dialog;
 
   // DOM elements initialization
-  var textInput = $(".textInput");
+   var textInput = $(".textInput");
 
 	 var currentFile = null;
 
-   formatBytes = function(bytes, decimals){
-    if (bytes == 0) return '0 Bytes';
-    var k = 1024,
-        dm = decimals || 2,
-        sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-        i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-   }
+    formatBytes = function(bytes, decimals){
+      if (bytes == 0) return '0 Bytes';
+      var k = 1024,
+          dm = decimals || 2,
+          sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+          i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
 
-  updateFields = function(){
-    var stats = fs.statSync(currentFile);
-    var fileSize = formatBytes(stats.size);
-    $("#fiSize").html(fileSize);
-    var splitPath = currentFile.split("\\");
-    $("#fiName").html(splitPath[splitPath.length - 1]);
-    $("#foName").html(splitPath[splitPath.length - 2]);
-    $('title').html(splitPath[splitPath.length - 1]);
-  }
+    updateFields = function(){
+      var stats = fs.statSync(currentFile);
+      var fileSize = formatBytes(stats.size);
+      $("#fiSize").html(fileSize);
+      var splitPath = currentFile.split("\\");
+      $("#fiName").html(splitPath[splitPath.length - 1]);
+      $("#foName").html(splitPath[splitPath.length - 2]);
+      $('title').html(splitPath[splitPath.length - 1]);
+    }
 
-  openFile = function(){
-    dialog.showOpenDialog(function (fileNames) {
-
-    if (fileNames === undefined) return;
-
+    openFile = function(){
+      dialog.showOpenDialog(function (fileNames) {
+      if (fileNames === undefined) return;
       var fileName = fileNames[0];
-
-        fs.readFile(fileName, 'utf-8', function (err, data) {
-			       currentFile = fileName;
-			       textInput.val(data);
-             updateFields();
-  	  });
-  	 });
+      fs.readFile(fileName, 'utf-8', function (err, data) {
+        currentFile = fileName;
+  			textInput.val(data);
+        updateFields();
+      });
+    });
     };
 
     saveAsNewFile = function(){
@@ -85,6 +82,23 @@ $(function () {
       $("#fiName").html('File Name');
       $("#fiSize").html('File Size');
       currentFile = null;
+    };
+
+    var mem = formatBytes(os.freemem());
+    $("#osMod").html(os.platform());
+    $("#freeMem").html(mem);
+
+    countWords = function(text){
+      var tow = text.match(/\S+/g);
+        return {
+            words: tow ? tow.length : 0,
+            characters: text.length
+        };
     }
 
+    var textarea = document.getElementById("text");
+    textarea.addEventListener("input", function() {
+        var response = countWords(this.value);
+        $("#rcount").html(response.words);
+    }, false);
 });
