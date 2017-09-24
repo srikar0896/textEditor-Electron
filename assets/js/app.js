@@ -20,7 +20,7 @@ $(function () {
    }
 
   updateFields = function(){
-    var stats = file.statSync(currentFile);
+    var stats = fs.statSync(currentFile);
     var fileSize = formatBytes(stats.size);
     $("#fiSize").html(fileSize);
     var splitPath = currentFile.split("\\");
