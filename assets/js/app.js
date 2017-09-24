@@ -10,6 +10,16 @@ $(function () {
 
 	 var currentFile = null;
 
+  updateFields = function(){
+    var stats = file.statSync(currentFile);
+    var fileSize = formatBytes(stats.size);
+    $("#fiSize").html(fileSize);
+    var splitPath = currentFile.split("\\");
+    $("#fiName").html(splitPath[splitPath.length - 1]);
+    $("#foName").html(splitPath[splitPath.length - 2]);
+    $('title').html(splitPath[splitPath.length - 1]);
+  }
+
   openFile = function(){
     dialog.showOpenDialog(function (fileNames) {
 
@@ -20,8 +30,7 @@ $(function () {
         fs.readFile(fileName, 'utf-8', function (err, data) {
 			       currentFile = fileName;
 			       textInput.val(data);
-
-             //TODO:implement the top nav foldername,filename and filesize.
+             updateFields();
   	  });
   	 });
     };
@@ -41,7 +50,7 @@ $(function () {
                   if (error) console.log('File not saved; ' + error);
                   console.log('File saved at ' + savePath);
 									currentFile = savePath;
-                  //TODO:implement the top nav foldername,filename and filesize.
+                  updateFields();
               });
           });
       }
@@ -56,7 +65,7 @@ $(function () {
 		        fs.writeFile(currentFile, content, (error) => {
 		            if (error) console.log('File not saved; ' + error);
 		            console.log('File saved at ' + currentFile);
-								//TODO: implement the stats of file
+								updateFields();
 		        });
 		    }
 		};
