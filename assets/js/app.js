@@ -10,6 +10,25 @@ $(function () {
 
 	 var currentFile = null;
 
+   formatBytes = function(bytes, decimals){
+    if (bytes == 0) return '0 Bytes';
+    var k = 1024,
+        dm = decimals || 2,
+        sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+        i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+   }
+
+  updateFields = function(){
+    var stats = fs.statSync(currentFile);
+    var fileSize = formatBytes(stats.size);
+    $("#fiSize").html(fileSize);
+    var splitPath = currentFile.split("\\");
+    $("#fiName").html(splitPath[splitPath.length - 1]);
+    $("#foName").html(splitPath[splitPath.length - 2]);
+    $('title').html(splitPath[splitPath.length - 1]);
+  }
+
   openFile = function(){
     dialog.showOpenDialog(function (fileNames) {
 
@@ -20,8 +39,7 @@ $(function () {
         fs.readFile(fileName, 'utf-8', function (err, data) {
 			       currentFile = fileName;
 			       textInput.val(data);
-
-             //TODO:implement the top nav foldername,filename and filesize.
+             updateFields();
   	  });
   	 });
     };
@@ -41,7 +59,7 @@ $(function () {
                   if (error) console.log('File not saved; ' + error);
                   console.log('File saved at ' + savePath);
 									currentFile = savePath;
-                  //TODO:implement the top nav foldername,filename and filesize.
+                  updateFields();
               });
           });
       }
@@ -56,9 +74,17 @@ $(function () {
 		        fs.writeFile(currentFile, content, (error) => {
 		            if (error) console.log('File not saved; ' + error);
 		            console.log('File saved at ' + currentFile);
-								//TODO: implement the stats of file
+								updateFields();
 		        });
 		    }
 		};
+
+    newFile = function(){
+      $("#text").val('');
+      $("#foName").html('Folder Name');
+      $("#fiName").html('File Name');
+      $("#fiSize").html('File Size');
+      currentFile = null;
+    }
 
 });

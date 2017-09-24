@@ -35,7 +35,7 @@ web: http://chaitanyachavali.com -->
                 <ul class="list-unstyled components">
                     <p>Select Option</p>
                     <li>
-                        <a class="navLink">New</a>
+                        <a onClick="newFile()" class="navLink">New</a>
                     </li>
                     <li>
                         <a onClick="openFile()" class="navLink">Open</a>
@@ -44,7 +44,7 @@ web: http://chaitanyachavali.com -->
                         <a onClick="saveFile()" class="navLink">Save</a>
                     </li>
                     <li>
-                        <a class="navLink" onClick="saveAsNewFile()">Save as</a>
+                        <a onClick="saveAsNewFile()" class="navLink">Save as</a>
                     </li>
                 </ul>
 
@@ -69,9 +69,9 @@ web: http://chaitanyachavali.com -->
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Folder Name</a></li>
-                                <li><a href="#">File Name</a></li>
-                                <li><a href="#">File Size</a></li>
+                                <li><a href="#" id="foName">Folder Name</a></li>
+                                <li><a href="#" id="fiName">File Name</a></li>
+                                <li><a href="#" id="fiSize">File Size</a></li>
                             </ul>
                         </div>
                     </div>
@@ -79,8 +79,8 @@ web: http://chaitanyachavali.com -->
 
                 <textarea placeholder="Text Here" id="text" class="textInput" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 400px; "></textarea>
                 <div class="line"></div>
-                <strong>OS - </strong><span>Windows</span> | <strong>Free Memory - </strong><span>1 GB</span>
-                <strong style="float:right;">Word Count - <i>20</i></strong>
+                <strong>OS - </strong><span id="osMod">win23</span> | <strong>Free Memory - </strong><span id="freeMem">1 GB</span>
+                <strong style="float:right;">Word Count - <i id="rcount">0</i></strong>
             </div>
         </div>
 
