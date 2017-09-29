@@ -3,12 +3,14 @@
 
 const electron = require('electron');
 const app = electron.app;
+const {ipcMain} = require('electron');
+const dialog = electron.dialog;
 const BrowserWindow = electron.BrowserWindow;
-// const {app, BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
 let window;
-
+let willQuitApp = false;
+var buttons = ["close without saving","save","save as"];
 function startUp() {
   window = new BrowserWindow({
     width: 1100,
@@ -20,8 +22,28 @@ function startUp() {
     slashes: true,
   }));
   window.webContents.openDevTools();
-  window.on('closed', () => {
-    window = null;
+  window.on('close', (e) => {
+    if(willQuitApp == false){
+
+      e.preventDefault();
+      window.webContents.send('checkFileStatus');
+      dialog.showMessageBox(window,{ type: 'question', buttons:buttons, message: 'Exit?' }, function (buttonIndex) {
+              if(buttonIndex== 1){
+                willQuitApp = true;
+                window.webContents.send('saveFile');
+              }else if(buttonIndex == 2){
+                willQuitApp = true;
+                window.webContents.send('saveAsNewFile');
+              }else{
+                willQuitApp = true;
+                window.close();
+              }
+        });
+    }
+
+  });
+  ipcMain.on("success-file-save",function(event,arg){
+    window.close();
   });
 }
 
