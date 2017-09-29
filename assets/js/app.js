@@ -9,8 +9,6 @@ $(function() {
     var textInput = $(".textInput");
 
     var currentFile = null;
-    var saveStatus = false;
-
     const ipcRenderer = require('electron').ipcRenderer;
   	 ipcRenderer.on('saveFile',(event,arg)=>{
   		 if(saveFile() == 1){
@@ -48,8 +46,8 @@ $(function() {
           }
           fs.readFile(filePath[0], 'utf-8', (error, data) => {
               if (error) console.log('Error in reading the file; ' + error);
-              $("#text").val(data);
-              saveStatus = true;
+              textInput.val(data);
+              textInput.trigger('keyup');
               currentFile = filePath[0];
               updateFields();
           });
@@ -83,9 +81,7 @@ $(function() {
     };
 
     saveAsNewFile = function() {
-        var content = $("#text").val();
-        var check = content.replace(/ /g, '');
-        if (check === '') {
+        if (textInput.trim().length == 0) {
             dialog.showErrorBox('Cannot Continue!', 'Please write something in the textarea to save');
         } else {
             dialog.showSaveDialog((savePath) => {
@@ -96,7 +92,7 @@ $(function() {
                 fs.writeFile(savePath, content, (error) => {
                     if (error) console.log('File not saved; ' + error);
                     console.log('File saved at ' + savePath);
-                    saveStatus = true;
+
                     currentFile = savePath;
                     updateFields();
                 });
@@ -114,7 +110,7 @@ $(function() {
                   console.log('File not saved; ' + error);
                 } else{
                   console.log('File saved at ' + currentFile);
-                  saveStatus = true;
+
                   updateFields();
                 }
             });
@@ -153,7 +149,7 @@ $(function() {
                               console.log('File not saved; ' + error);
                             } else{
                               console.log('File saved at ' + currentFile);
-                              saveStatus = true;
+
                               updateFields();
                               resetValues();
                             }
@@ -185,10 +181,7 @@ $(function() {
         };
     }
 
-    var textarea = document.getElementById("text");
-    textarea.addEventListener("input", function() {
-        var response = countWords(this.value);
-        saveStatus = false;
-        $("#rcount").html(response.words);
-    }, false);
+  textInput.on('keyup',function(){
+    $("#rcount").html(countWords(textInput.val())["words"] + " words");
+  });
 });
